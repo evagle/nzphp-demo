@@ -20,6 +20,15 @@ class ErrorCode
         }
     }
 
+    public static function getErrorLevel($code)
+    {
+        if ($code < 100) {
+            return "alert";
+        } else {
+            return "error";
+        }
+    }
+
     // system error < 100
     const UNDEFINED_ERROR = 1;
     const SYSTEM_ERROR = 2;

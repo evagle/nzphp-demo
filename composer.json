@@ -1,5 +1,5 @@
 {
-	"name": "test/test",
+	"name": "nzphp/demo",
 	"type": "app",
     "description": "ZPHP is a light that is dedicated to gaming, social networking, web, mobile server-side frameworks. Providing high performance real-time communication solutions.",
     "keywords": ["framework", "server", "socket", "multi", "progress" ,"thread"],
@@ -14,12 +14,16 @@
 	"require": {
 		"nzphp/nzphp": "dev-master"
 	},
-	"classmap": [
-		"lib",
-		"app/common",
-		"app/controllers",
-		"app/database",
-		"app/models",
-		"app/services"
-	]
+
+    "autoload": {
+      "classmap": [
+        "lib",
+        "app/common",
+        "app/controllers",
+        "app/database",
+        "app/models",
+        "app/services"
+      ]
+    }
+
 }

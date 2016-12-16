@@ -56,7 +56,7 @@ class AppException extends \Exception
     /**
      * 获取执行过程中的发生的最后一次异常
      *
-     * @return GameException
+     * @return AppException
      */
     public static function getLastException()
     {
@@ -79,10 +79,11 @@ class AppException extends \Exception
         }
 
         $config = ZConfig::get('project');
+        $debug = ZConfig::get('debug');
         $viewMode = ZConfig::getField('project', 'view_mode', 'Json');
         $exceptionView = ZView::getInstance($viewMode);
         if('Php' === $viewMode) {
-            if($config['debug_mode']) {
+            if($debug) {
                 $exceptionView->setTpl('public/exception.php');
             } else {
                 $exceptionView->setTpl('public/error.php');
@@ -90,12 +91,14 @@ class AppException extends \Exception
         }
         $exceptionView->setModel(Formater::fatal($error));
         $model = $exceptionView->getModel();
+        ZLog::emergency("fatal", $model);
 
         $info['data'] = null;
-        if ($config['debug_mode']) {
+        if ($debug) {
             $info['debug'] = $model;
         }
         $message = ErrorCode::getErrorMessage(ErrorCode::SYSTEM_ERROR);
+        $info['msg'] = $message;
         $info['ts'] = time();
         $info['status'] = $config['status_error'];
 
@@ -111,10 +114,11 @@ class AppException extends \Exception
     public static function exceptionHandler(\Exception $exception)
     {
         $config = ZConfig::get('project');
+        $debug = ZConfig::get('debug');
         $viewMode = ZConfig::getField('project', 'view_mode', 'Json');
         $exceptionView = ZView::getInstance($viewMode);
         if('Php' === $viewMode) {
-            if($config['debug_mode']) {
+            if($debug) {
                 $exceptionView->setTpl('public/exception.php');
             } else {
                 $exceptionView->setTpl('public/error.php');
@@ -123,15 +127,22 @@ class AppException extends \Exception
         $exceptionView->setModel(Formater::exception($exception));
         $model = $exceptionView->getModel();
         $info['data'] = null;
-        if ($config['debug_mode']) {
+        if ($debug) {
             $info['debug'] = $model;
         }
         if(!empty($exception->realCode)) {
             $info['msg'] = ErrorCode::getErrorMessage($exception->realCode);
             $info['code'] = $exception->realCode;
+            $errorLevel = ErrorCode::getErrorLevel($exception->realCode);
+            if ($errorLevel == "error") {
+                ZLog::error("exception", $model);
+            } else {
+                ZLog::emergency("exception", $model);
+            }
         } else{
-            $info['msg'] = ErrorCode::getErrorMessage(ErrorCode::UNDEFINED_ERROR);
+            $info['msg'] = ErrorCode::getErrorMessage(ErrorCode::SYSTEM_ERROR);
             $info['code'] = $model['code'];
+            ZLog::emergency("exception", $model);
         }
 
         $info['status'] = $config['status_error'];

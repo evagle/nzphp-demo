@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "412617d96f0d0e1c3723683727f6900d",
+    "hash": "2d97d3920ddbfd8ba49251f8f124448a",
     "content-hash": "b30b17d03f012b6e022d4b6acfebac8b",
     "packages": [
         {
@@ -91,12 +91,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/evagle/nzphp.git",
-                "reference": "8250fe017ad53c4ee3c30411a819ce291f3d28fb"
+                "reference": "58a1a209c997add0aa28fc6c12181c5dcf5c5e46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/evagle/nzphp/zipball/8250fe017ad53c4ee3c30411a819ce291f3d28fb",
-                "reference": "8250fe017ad53c4ee3c30411a819ce291f3d28fb",
+                "url": "https://api.github.com/repos/evagle/nzphp/zipball/58a1a209c997add0aa28fc6c12181c5dcf5c5e46",
+                "reference": "58a1a209c997add0aa28fc6c12181c5dcf5c5e46",
                 "shasum": ""
             },
             "require": {
@@ -134,7 +134,7 @@
                 "progress",
                 "server"
             ],
-            "time": "2016-12-15 11:11:07"
+            "time": "2016-12-16 06:27:34"
         },
         {
             "name": "psr/log",
