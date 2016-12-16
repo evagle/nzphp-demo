@@ -14,7 +14,12 @@
 	"require": {
 		"nzphp/nzphp": "dev-master"
 	},
-	"autoload": {
-        "psr-0": { "ZPHP\\": "" }
-    }
+	"classmap": [
+		"lib",
+		"app/common",
+		"app/controllers",
+		"app/database",
+		"app/models",
+		"app/services"
+	]
 }
