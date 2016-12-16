@@ -22,8 +22,8 @@ return array(
             'adapter' => 'Redis',
             'name' => 'nc',
             'pconnect' => true,
-            'host' => 'host',
-            'port' => 'port',
+            'host' => '127.0.0.1',
+            'port' => '7001',
             'timeout' => 5
         ),
     ),

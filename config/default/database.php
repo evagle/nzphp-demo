@@ -1,5 +1,15 @@
 <?php
+/**
+ * By include variables.php, it's able to use variables in config.
 
+    $variables = require_once "variables.php";
+    $variables = $variables['variables'];
+    return array(
+        "mysql" => [
+            "host" => $variables['host'],
+        ]
+    );
+ */
 return array(
 
 	/*
@@ -36,7 +46,7 @@ return array(
         'pois'=>array(
             array(
                 'name' => 'mongo-01',
-                'dsn' => 'mongodb://10.25.242.10:27017',
+                'dsn' => 'mongodb://127.0.0.1:27017',
                 'host' => '127.0.0.1',
                 'port' => 27017,
                 'dbName'=>'POI',

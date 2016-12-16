@@ -16,8 +16,7 @@ class main extends BaseController
 {
     public function main()
     {
-        ZLog::info("aaa.log", ["info"]);
-//        ZLog::debug("aaa.log", ["debug"]);
+        ZLog::info("aaa", ["info", ZConfig::get('views_path')]);
         $projectName = ZConfig::get('project_name');
         return $this->getView([
                 "welcome to $projectName!"
