@@ -1,6 +1,6 @@
 <?php
 
-return array(
+$config = array(
 
     /*
     |--------------------------------------------------------------------------
@@ -75,3 +75,11 @@ return array(
     'locale' => 'en',
 
 );
+
+if (file_exists('includes.config.php')) {
+    require('includes.config.php');
+    $includeContents = includePublicConfigs();
+    $config += $includeContents;
+}
+
+return $config;
