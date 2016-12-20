@@ -9,7 +9,7 @@ use ZPHP\Socket\Callback\SwooleWebSocket;
 
 class WebSocket extends SwooleWebSocket
 {
-    public function onMessage($server, $frame)
+    public function onMessage(\swoole_server $server, \swoole_websocket_frame $frame)
     {
     }
 
@@ -17,16 +17,16 @@ class WebSocket extends SwooleWebSocket
     {
     }
 
-    public function onClose()
+    public function onClose(\swoole_server $server, int $fd, int $from_id)
     {
     }
 
-    public function onReceive()
+    public function onReceive(\swoole_server $server, int $fd, int $from_id, string $data)
     {
     }
 
 
-    public function onWorkerStart($serv, $workId)
+    public function onWorkerStart($server, $workId)
     {
     }
 
@@ -38,7 +38,7 @@ class WebSocket extends SwooleWebSocket
     {
     }
 
-    public function onPacket($server, $data, $addr)
+    public function onPacket($server, $data, $clientInfo)
     {
     }
 
