@@ -21,7 +21,6 @@ $config = array(
         'debug_mode' => true,
         'status_waring' => 1,
         'status_error' => 2,
-        'static_server' => '/static/',
     ),
     'socket' => array(
         'host' => '0.0.0.0', //socket 监听ip
@@ -30,18 +29,18 @@ $config = array(
         'server_type' => \ZPHP\Socket\Adapter\Swoole::TYPE_WEBSOCKET,
         'daemonize' => 1, //是否开启守护进程
         'debug_mode' => true,
-        'work_mode' => 3,
+        'work_mode' => 3,                       // 1:base, 2: 多线程 3: 多进程，Doc：http://wiki.swoole.com/wiki/page/353.html
         'worker_num' => 2,
         'task_worker_num' => 2,
-        'max_request' => 0,                     //单个进程最大处理请求数
+        'max_request' => 0,                     // 单个进程最大处理请求数
         'addlisten' => array(                   // 额外监听端口10901，业务逻辑通过UDP来发送消息给websocket server, server收到后push给客户端
             'ip' => '0.0.0.0',
             'port' => 10901
         ),
-        'client_class' => 'socket\\WebSocket',  //socket 回调类
+        'client_class' => 'socket\\WebSocket',  // socket 回调类
 
-        'protocol' => 'Json',                   //socket通信数据协议
-        'dispatch_mode' => 5,
+        'protocol' => 'Json',                   // socket通信数据协议
+        'dispatch_mode' => 5,                   // 1，轮循模式 2，固定模式 3，抢占模式 4，IP分配 5，UID分配 Doc: http://wiki.swoole.com/wiki/page/277.html
         'heartbeat_idle_time' => 60,
         'heartbeat_check_interval' => 5,
         'group' => 'www-data',
