@@ -29,17 +29,21 @@ return array(
 	*/
     'mysql' => array(
         'accounts' => array(
-            'dsn' => 'mysql:host=127.0.0.1;port=3306',
+            'driver' => 'mysql',
             'host' => '127.0.0.1',
             'port' => 3306,
-            'name' => 'accounts',
-            'user' => 'user',
-            'pass' => 'password',
-            'dbname' => 'dbname',
+            'database' => 'db-demo',
+            'username' => 'test',
+            'password' => 'test',
             'charset' => 'UTF8',
-            'pconnect' => true,
+            'collation' => 'utf8_unicode_ci',
             'ping' => 1,
             'pingtime' => 7200,
+            'prefix'    => '',
+            'strict'    => false,
+            'options'   => array(
+                PDO::ATTR_PERSISTENT => false,
+            ),
         ),
     ),
     'mongodb' => array(
