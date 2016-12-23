@@ -19,3 +19,5 @@ function includePublicConfigs()
     }
     return $config;
 }
+
+return [];

@@ -42,9 +42,11 @@ $config = array(
     'project' => array(
         'view_mode'=> 'Json',
         'exception_handler' => 'common\AppException::exceptionHandler',
+        'fatal_handler' => 'common\AppException::fatalHandler',
+        'error_handler' => 'common\AppException::errorHandler',
         'status_waring' => 1,
         'status_error' => 2,
-        'app_host'=> $_SERVER['HTTP_HOST'],
+        'app_host'=> isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "",
         'static_server'=> '/static/',
     ),
 

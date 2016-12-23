@@ -111,7 +111,7 @@ class AppException extends \Exception
      *
      * @param \Exception $exception
      */
-    public static function exceptionHandler(\Exception $exception)
+    public static function exceptionHandler($exception)
     {
         $config = ZConfig::get('project');
         $debug = ZConfig::get('debug');
@@ -124,7 +124,11 @@ class AppException extends \Exception
                 $exceptionView->setTpl('public/error.php');
             }
         }
-        $exceptionView->setModel(Formater::exception($exception));
+        if ($exception instanceof \Exception) {
+            $exceptionView->setModel(Formater::exception($exception));
+        } else {
+            $exceptionView->setModel(Formater::error($exception));
+        }
         $model = $exceptionView->getModel();
         $info['data'] = null;
         if ($debug) {
