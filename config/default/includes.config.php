@@ -6,18 +6,13 @@
  * Time: 11:04 AM
  */
 
-use ZPHP\ZPHP;
+$publicConfig = [];
+$publicConfigFiles = array('route.php', 'mail.php');
 
-function includePublicConfigs()
-{
-    $config = [];
-    $publicConfig = array('route.php', 'mail.php');
-
-    foreach ($publicConfig as $file) {
-        $file = ZPHP::getRootPath() . DS . 'config' . DS . 'public' . DS . $file;
-        $config += include "{$file}";
-    }
-    return $config;
+foreach ($publicConfigFiles as $file) {
+    $file = dirname(__DIR__) . DS . 'public' . DS . $file;
+    \ZPHP\Common\ZLog::info('config', [$file]);
+    $publicConfig += include "{$file}";
 }
 
-return [];
+return $publicConfig;

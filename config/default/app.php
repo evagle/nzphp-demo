@@ -78,10 +78,8 @@ $config = array(
 
 );
 
-if (file_exists('includes.config.php')) {
-    require('includes.config.php');
-    $includeContents = includePublicConfigs();
-    $config += $includeContents;
+if (file_exists(__DIR__.'/includes.config.php')) {
+    $config += include_once 'includes.config.php';
 }
 
 return $config;
