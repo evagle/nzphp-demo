@@ -10,10 +10,7 @@ namespace controllers\main;
 
 use controllers\BaseController;
 use models\accounts\User;
-use models\accounts\UserB;
-use ZPHP\Common\ZLog;
 use ZPHP\Core\ZConfig;
-//use ZPHP\DB\Pdo;
 
 class main extends BaseController
 {
@@ -21,21 +18,25 @@ class main extends BaseController
     {
         $projectName = ZConfig::get('project_name');
 
-        $t1 = microtime(true);
-        $names = User::getColumnNames();
-        $user = User::find(14);
-        $user->username .= "2";
-        $user->update();
+        return $this->getView([
+                "welcome to $projectName!"
+            ], false);
+    }
 
-        if ($user instanceof User) {
-            ZLog::info('info', [$user->username]);
-        } else {
-            ZLog::info('info', ['22222']);
-        }
+    public function test()
+    {
+        $projectName = ZConfig::get('project_name');
+
+        $t1 = microtime(true);
+        $user = User::find(14);
+        $x = $user->username;
+
         $t2 = microtime(true);
 
         return $this->getView([
-                "welcome to $projectName!", $t2-$t1, ($user)
-            ], false);
+            "welcome to $projectName!", $t2-$t1,  $user, $user->username
+        ], false);
     }
+
+
 }
