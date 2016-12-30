@@ -80,7 +80,7 @@ class AppException extends \Exception
 
         $config = ZConfig::get('project');
         $debug = ZConfig::get('debug');
-        $viewMode = ZConfig::getField('project', 'view_mode', 'Json');
+        $viewMode = ZConfig::get( 'view_mode', 'Json');
         $exceptionView = ZView::getInstance($viewMode);
         if('Php' === $viewMode) {
             if($debug) {
@@ -115,7 +115,7 @@ class AppException extends \Exception
     {
         $config = ZConfig::get('project');
         $debug = ZConfig::get('debug');
-        $viewMode = ZConfig::getField('project', 'view_mode', 'Json');
+        $viewMode = ZConfig::get( 'view_mode', 'Json');
         $exceptionView = ZView::getInstance($viewMode);
         if('Php' === $viewMode) {
             if($debug) {

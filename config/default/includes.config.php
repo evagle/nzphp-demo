@@ -11,7 +11,6 @@ $publicConfigFiles = array('route.php', 'mail.php');
 
 foreach ($publicConfigFiles as $file) {
     $file = dirname(__DIR__) . DS . 'public' . DS . $file;
-    \ZPHP\Common\ZLog::info('config', [$file]);
     $publicConfig += include "{$file}";
 }
 

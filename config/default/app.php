@@ -37,18 +37,24 @@ $config = array(
 
     'app_path' => 'app',
     'ctrl_path' => 'controllers',
+    'default_ctrl_name' => 'main\\main',
+    'default_method_name' => "main",
+
     'serialize_type' => 'Msgpack',
 
-    'project' => array(
-        'view_mode'=> 'Json',
-        'exception_handler' => 'common\AppException::exceptionHandler',
-        'fatal_handler' => 'common\AppException::fatalHandler',
-        'error_handler' => 'common\AppException::errorHandler',
-        'status_waring' => 1,
-        'status_error' => 2,
-        'app_host'=> isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "",
-        'static_server'=> '/static/',
-    ),
+    'view_mode'=> 'Php',
+
+    /**
+     * Exception and error handler
+     */
+    'exception_handler' => 'common\AppException::exceptionHandler',
+    'fatal_handler' => 'common\AppException::fatalHandler',
+    'error_handler' => 'common\AppException::errorHandler',
+
+    'status_waring' => 1,
+    'status_error' => 2,
+    'app_host'=> isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : "",
+    'static_server'=> '/static/',
 
     /*
     |--------------------------------------------------------------------------
@@ -76,6 +82,7 @@ $config = array(
 
     'locale' => 'en',
 
+    'time_zone' => 'Asia/Shanghai'
 );
 
 if (file_exists(__DIR__.'/includes.config.php')) {

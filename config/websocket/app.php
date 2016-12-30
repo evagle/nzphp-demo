@@ -14,21 +14,21 @@ $config = array(
     'project_name' => 'websocket_demo',
     'app_path' => 'app',
     'ctrl_path' => 'controllers',
-    'project' => array(
-        'view_mode' => 'Json',
-        'serialize_type' => 'Msgpack',
-        'exception_handler' => 'common\AppException::exceptionHandler',
-        'debug_mode' => true,
-        'status_waring' => 1,
-        'status_error' => 2,
-    ),
+
+    'view_mode' => 'Json',
+    'serialize_type' => 'Msgpack',
+    'exception_handler' => 'common\AppException::exceptionHandler',
+    'debug' => true,
+    'status_waring' => 1,
+    'status_error' => 2,
+
+
     'socket' => array(
         'host' => '0.0.0.0', //socket 监听ip
         'port' => 9901, //socket 监听端口
         'adapter' => 'Swoole', //socket 驱动模块
         'server_type' => \ZPHP\Socket\Adapter\Swoole::TYPE_WEBSOCKET,
         'daemonize' => 1, //是否开启守护进程
-        'debug_mode' => true,
         'work_mode' => 3,                       // 1:base, 2: 多线程 3: 多进程，Doc：http://wiki.swoole.com/wiki/page/353.html
         'worker_num' => 2,
         'task_worker_num' => 2,

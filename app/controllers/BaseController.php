@@ -25,9 +25,9 @@ abstract class BaseController implements IController
 
     }
 
-    protected function getView($params = [], $viewMode = null)
+    protected function getView($params = [], $contentTemplate = "")
     {
-        $viewMode = $viewMode ? $viewMode : ZConfig::getField('project', 'view_mode');
+        $viewMode = ZConfig::get('view_mode');
 
         $data = array(
             'data' => $params,
@@ -37,6 +37,11 @@ abstract class BaseController implements IController
             'code' => 0,
             'msg' => '',
         );
+
+        if ($viewMode == "Php") {
+            $data['content_template'] = $contentTemplate;
+            Request::setTplFile("layout.php");
+        }
         return $data;
     }
 

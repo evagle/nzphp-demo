@@ -35,7 +35,7 @@ class main extends BaseController
 
         return $this->getView([
             "welcome to $projectName!", $t2-$t1,  $user, $user->username
-        ], false);
+        ], "main.php");
     }
 
 
