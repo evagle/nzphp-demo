@@ -30,11 +30,11 @@ return array(
     'pdo' => array(
         'accounts' => array(
             'driver' => 'mysql',
-            'host' => '127.0.0.1',
-            'port' => 3306,
-            'database' => 'db-demo',
-            'username' => 'test',
-            'password' => 'test',
+            'host' => '120.26.71.45',
+            'port' => 3310,
+            'database' => 'pocketpet_dev0926_user',
+            'username' => 'pocketpet',
+            'password' => '3MjdvUuXqxca6cbc',
             'charset' => 'UTF8',
             'collation' => 'utf8_unicode_ci',
             'ping' => 1,

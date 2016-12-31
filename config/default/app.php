@@ -86,7 +86,7 @@ $config = array(
 );
 
 if (file_exists(__DIR__.'/includes.config.php')) {
-    $config += include_once 'includes.config.php';
+    $config += include 'includes.config.php';
 }
 
 return $config;

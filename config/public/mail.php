@@ -1,23 +1,25 @@
 <?php
 
 return array(
+    'mail' => array(
 
-	'driver' => 'smtp',
+        'driver' => 'smtp',
 
-	'host' => 'smtp.mailgun.org',
+        'host' => 'smtp.mailgun.org',
 
-	'port' => 587,
+        'port' => 587,
 
-	'from' => array('address' => null, 'name' => null),
+        'from' => array('address' => null, 'name' => null),
 
-	'encryption' => 'tls',
+        'encryption' => 'tls',
 
-	'username' => null,
+        'username' => null,
 
-	'password' => null,
+        'password' => null,
 
-	'sendmail' => '/usr/sbin/sendmail -bs',
+        'sendmail' => '/usr/sbin/sendmail -bs',
 
-	'pretend' => false,
+        'pretend' => false,
+    )
 
 );
