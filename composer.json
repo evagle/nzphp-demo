@@ -20,7 +20,6 @@
         "lib",
         "app/common",
         "app/controllers",
-        "app/database",
         "app/models",
         "app/services"
       ]
