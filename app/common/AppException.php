@@ -2,15 +2,11 @@
 
 namespace common;
 
-use utils\notify\NotifyManager;
-use utils\notify\NotifyType;
-use zhconvert\ZhConvert;
 use ZPHP\Common\Formater,
     ZPHP\View\Factory as ZView,
     ZPHP\Core\ZConfig as ZConfig;
 use ZPHP\Common\ZLog;
 use ZPHP\Protocol\Response;
-use ZPHP\Protocol\Request;
 /**
  * 游戏异常基类
  *
@@ -101,6 +97,7 @@ class AppException extends \Exception
         $info['msg'] = $message;
         $info['ts'] = time();
         $info['status'] = $config['status_error'];
+        $info['_tpl_file'] = 'exception.php';
 
         Response::status('200');
         Response::display($info);
@@ -150,7 +147,7 @@ class AppException extends \Exception
         }
 
         $info['status'] = $config['status_error'];
-
+        $info['_tpl_file'] = 'exception.php';
         return Response::display($info);
     }
 
