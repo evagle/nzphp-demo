@@ -74,9 +74,8 @@ class AppException extends \Exception
             return;
         }
 
-        $config = ZConfig::get('project');
         $debug = ZConfig::get('debug');
-        $viewMode = ZConfig::get( 'view_mode', 'Json');
+        $viewMode = ZConfig::get('view_mode', 'Json');
         $exceptionView = ZView::getInstance($viewMode);
         if('Php' === $viewMode) {
             if($debug) {
@@ -96,7 +95,7 @@ class AppException extends \Exception
         $message = ErrorCode::getErrorMessage(ErrorCode::SYSTEM_ERROR);
         $info['msg'] = $message;
         $info['ts'] = time();
-        $info['status'] = $config['status_error'];
+        $info['status'] = ZConfig::get('status_error');
         $info['_tpl_file'] = 'exception.php';
 
         Response::status('200');
@@ -106,11 +105,10 @@ class AppException extends \Exception
     /**
      * 异常处理回调函数
      *
-     * @param \Exception $exception
+     * @param \Exception|\Error $exception
      */
     public static function exceptionHandler($exception)
     {
-        $config = ZConfig::get('project');
         $debug = ZConfig::get('debug');
         $viewMode = ZConfig::get( 'view_mode', 'Json');
         $exceptionView = ZView::getInstance($viewMode);
@@ -146,13 +144,14 @@ class AppException extends \Exception
             ZLog::emergency("exception", $model);
         }
 
-        $info['status'] = $config['status_error'];
+        $info['status'] = ZConfig::get('status_error');
         $info['_tpl_file'] = 'exception.php';
         return Response::display($info);
     }
 
     public static function errorHandler($errno, $errstr, $errfile, $errline, $errcontext)
     {
+        ZLog::error("error", [$errno, $errstr, $errfile, $errline, $errcontext]);
         switch ($errno) {
             case E_USER_ERROR:
                 break;

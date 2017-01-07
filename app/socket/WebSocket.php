@@ -104,7 +104,7 @@ class WebSocket extends SwooleWebSocket
         parent::onWorkerStart($server, $workId);
         \register_shutdown_function(function() use ($server) {
             $params = Request::getParams();
-            Request::setViewMode(ZConfig::getField('project', 'view_mode', 'Json'));
+            Request::setViewMode(ZConfig::get('view_mode', 'Json'));
             ZLog::info('websocket', ['shutdown', $params]);
         });
     }
