@@ -1,6 +1,7 @@
 <?php
 namespace socket;
 
+use common\AppException;
 use ZPHP\Common\MessagePacker;
 use ZPHP\Common\ZLog;
 use ZPHP\Core\Route;
@@ -109,41 +110,53 @@ class WebSocket extends SwooleWebSocket
         });
     }
 
+    /**
+     * swoole不支持set_exception_handler方法，所以task进程里可以用try catch来捕获异常
+     * 然后交给异常处理函数处理
+     * @param \swoole_server $server
+     * @param $task_id
+     * @param $from_id
+     * @param $_data
+     */
     public function onTask(\swoole_server $server, $task_id, $from_id, $_data)
     {
-        if(is_string($_data)) {
-            $_data = json_decode($_data, true);
-        }
-        switch ($_data[0]) {
-            case 1:               //单发
-                self::push($server, $_data[1][0], self::packData($_data[1][1]));
-                ZLog::info("websocket", [$_data[1][1], $_data[1][0]]);
-                break;
-            case 2:                 //组播
-                $connection = \ZPHP\Conn\Factory::getInstance();
-                $channelName = $_data[1][0];
-                $channel = $connection->getChannelInfo($channelName);
-                ZLog::info("websocket", [$_data[1][1], $channel]);
-                $data = self::packData($_data[1][1]);
-                foreach($channel as $uid => $_fd) {
-                    if (!self::push($server, $_fd, $data)) {
-                        $connection->deleteUidFromChannel($channelName, $uid);
-                        ZLog::info("websocket", ["[websocket] Delete user from channel [channel, uid] = [$channelName, $uid]"]);
+        try {
+            if (is_string($_data)) {
+                $_data = json_decode($_data, true);
+            }
+            switch ($_data[0]) {
+                case 1:               //单发
+                    self::push($server, $_data[1][0], self::packData($_data[1][1]));
+                    ZLog::info("websocket", [$_data[1][1], $_data[1][0]]);
+                    break;
+                case 2:                 //组播
+                    $connection = \ZPHP\Conn\Factory::getInstance();
+                    $channelName = $_data[1][0];
+                    $channel = $connection->getChannelInfo($channelName);
+                    ZLog::info("websocket", [$_data[1][1], $channel]);
+                    $data = self::packData($_data[1][1]);
+                    foreach ($channel as $uid => $_fd) {
+                        if (!self::push($server, $_fd, $data)) {
+                            $connection->deleteUidFromChannel($channelName, $uid);
+                            ZLog::info("websocket", ["[websocket] Delete user from channel [channel, uid] = [$channelName, $uid]"]);
+                        }
                     }
-                }
-                break;
-            case 3:             //按需求广播
-                $data = $_data[1];
-                foreach ($data['params'] as $items) {
-                    if(empty($data['channel'][$items[1]])) {
-                        continue;
+                    break;
+                case 3:             //按需求广播
+                    $data = $_data[1];
+                    foreach ($data['params'] as $items) {
+                        if (empty($data['channel'][$items[1]])) {
+                            continue;
+                        }
+                        $sendData = self::packData($items[0]);
+                        foreach ($data['channel'][$items[1]] as $_uid => $_fd) {
+                            self::push($server, $_fd, $sendData);
+                        }
                     }
-                    $sendData = self::packData($items[0]);
-                    foreach($data['channel'][$items[1]] as $_uid=>$_fd) {
-                        self::push($server, $_fd, $sendData);
-                    }
-                }
-                break;
+                    break;
+            }
+        } catch (\Exception $e) {
+            AppException::exceptionHandler($e);
         }
     }
 
