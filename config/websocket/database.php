@@ -47,35 +47,29 @@ return array(
         ),
     ),
     'mongodb' => array(
-        'pois'=>array(
-            array(
-                'name' => 'mongo-01',
-                'dsn' => 'mongodb://127.0.0.1:27017',
-                'host' => '127.0.0.1',
-                'port' => 27017,
-                'dbName'=>'POI',
-                'option'=> array(
-                    'connect'=>TRUE,
-                ),
-                'distance'=> 250,  //范围(m)
-                'weight' => 1,
+        'mongo1'=>array(
+            'name' => 'mongo-01',
+            'dsn' => 'mongodb://127.0.0.1:27017',
+            'host' => '127.0.0.1',
+            'port' => 27017,
+            'dbName'=>'POI',
+            'option'=> array(
+                'connect'=>TRUE,
             ),
+            'distance'=> 250,  //范围(m)
+            'weight' => 1,
         )
     ),
     'redis' => array(
         'redisdemo' => array(
             'adapter' => 'RL',
-            'servers' => [
-                [
-                    '_prefix' => 'prefix0',
-                    'name' => 'redisdemo',
-                    'pconnect' => true,
-                    'host' =>  '127.0.0.1',
-                    'port' => 17001,
-                    'timeout' => 5,
-                    'weight' => 1,
-                ]
-            ]
+            '_prefix' => 'prefix0',
+            'name' => 'redisdemo',
+            'pconnect' => true,
+            'host' =>  '127.0.0.1',
+            'port' => 17001,
+            'timeout' => 5,
+            'weight' => 1,
         ),
     ),
 
