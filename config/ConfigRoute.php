@@ -1,9 +1,16 @@
 <?php
 
-## 配置路由，这里决定使用哪些配置
-
+/**
+ * Class ConfigRoute
+ * 设置配置路径
+ */
 class ConfigRoute
 {
+    /**
+     * 返回项目配置目录的路径
+     * 默认是default，表示使用ROOT/config/default下的配置
+     * @return mixed|string
+     */
     public static function getConfigPath()
     {
         $configPath = "";
