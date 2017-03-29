@@ -8,6 +8,11 @@
 
 use ZPHP\ZPHP;
 
+/*****
+ * 加载public config，框架会最先加载这里的配置，再加载项目配置，
+ * 如果项目配置中出现相同的key，将会覆盖这里的配置
+ * @return array|mixed
+ */
 function includePublicConfigs()
 {
     $config = [];
