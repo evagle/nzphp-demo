@@ -37,7 +37,7 @@ $config = array(
             'ip' => '0.0.0.0',
             'port' => 10901
         ),
-        'client_class' => 'socket\\WebSocket',  // socket 回调类
+        'socket_callback_class' => 'socket\\WebSocket',  // socket 回调类
 
         'protocol' => 'Json',                   // socket通信数据协议
         'dispatch_mode' => 5,                   // 1，轮循模式 2，固定模式 3，抢占模式 4，IP分配 5，UID分配 Doc: http://wiki.swoole.com/wiki/page/277.html
