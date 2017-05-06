@@ -6,7 +6,7 @@ use ZPHP\Common\MessagePacker;
 use ZPHP\Common\ZLog;
 use ZPHP\Core\Route;
 use ZPHP\Core\ZConfig;
-use ZPHP\Protocol\Request;
+use ZPHP\Core\Request;
 use ZPHP\Socket\Callback\SwooleWebSocket;
 
 class WebSocket extends SwooleWebSocket

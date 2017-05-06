@@ -6,7 +6,7 @@ use ZPHP\Controller\IController,
     ZPHP\Core\ZConfig as ZConfig,
     ZPHP\Common\Route as ZRoute,
     common;
-use ZPHP\Protocol\Request;
+use ZPHP\Core\Request;
 
 
 abstract class BaseController implements IController
